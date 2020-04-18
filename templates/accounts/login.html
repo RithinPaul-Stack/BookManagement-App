@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+
+{% block title %} | Account Login {% endblock %}
+
+{% block content %}
+
+
+<div class="ui middle aligned center aligned grid">
+        <div class="column" style="top: 5rem;
+        width:50%;
+        bottom: 0px;
+        right: 0px;">
+          <div class="content" style="bottom:1rem;">
+            <h3> Login </h3>
+          </div>
+           <form class="ui form" method="POST" action="{% url 'login' %}"  autocomplete="off">
+            {% csrf_token %}
+            {% include 'bars/alerts.html' %}
+            <div class="ui stacked segment" style="background-color: rgba(0,0,0,0.1)">
+              <div class="field">
+                <div class="ui left icon input">
+                  <i class="user icon"></i>
+                    <input type="text" name="username" placeholder="Username" autofocus="" id="id_username" required="">
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui left icon input">
+                    <i class="lock icon"></i>
+                <input type="password" name="password" placeholder="Password" id="id_password" required="">
+                </div>
+              </div>
+              <input type="submit" class="ui fluid large teal submit button">
+            </br>
+              Dont have an account? <a href="{% url 'register' %}">Sign up here</a></br>
+            OR </br>
+          Login with Gmail</br>
+              <a href="{% provider_login_url 'google' %}" class="ui fluid large teal submit button"><i class="google icon"></i>Google</a>
+            </div>   
+        
+            {% endblock %}

@@ -1,0 +1,137 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="ui container" id="showcase" style="width:100%">    
+    <img src="{% static 'images/2.jpg' %}" style="width: 100%;height:100%;"/> 
+        <div class="overlay">
+            <h1 style="margin-top:9rem;margin-left:22rem;color:white;font-size:45px;">
+                Being a Bibliophile Just Got So Easy...
+            </h1>
+            <h1 style="margin-top:9rem;margin-left:15rem;color:white;font-size:45px;">
+                Here you go, while we get you into the universe of books! <p>Scroll down lad :)</p>
+            </h1>
+        </div>
+</div>
+<h3 style="text-align: center"> Latest Releases</h3>
+<div class="ui three column grid" style="padding:1rem;">
+  {% if listings %}
+  {% for listing in listings %}
+        <div class="column">
+          <div class="ui fluid card">
+            <div class="image">
+              <img src="{{listing.photo_main.url}}" style="height:22rem">
+            </div>
+            <div class="content">
+              <div class="ui two column grid">
+                <div class="column">
+                    <span class="header" style="font-size: 18px;">{{listing.title}}</span>
+                </div>
+                <div class="column">
+                    <span class="right floated">
+                        By : {{listing.author}}
+                      </span>
+                </div>
+              </div>
+              
+              
+            </div>
+            <a class="ui bottom attached button" href="{% url 'listings' listing.id %}">
+                Check out More!
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+          <div style="text-align: center;">
+            <p>No Listings Available</p>
+          </div>
+        {% endif %}
+       
+  </div>
+  
+<div class="ui three column grid" id="services">
+  
+ 
+    <div class="column">
+      
+      <h3> Renting and Selling Services</h3>
+      <p style="font-size:18px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+        hic dignissimos ratione ea quae.</p>
+        <div style="margin-top: 2rem;font-size:20px;">Call Us on :<i class="phone icon"></i> (617)-555-5555</div>
+    </div>
+    <div class="column">
+      <h3>Book Management</h3>
+      <p style="font-size:18px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+        hic dignissimos ratione ea quae.</p>
+        <div style="margin-top: 2rem;font-size:20px;">Mail :<i class="envelope icon" style=""></i>library.edu@umkc.com</div>
+    </div>
+    <div class="column">
+      <h3>Infrastructure and Support</h3>
+      <p style="font-size:18px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+        hic dignissimos ratione ea quae.</p>
+        <div style="margin-top:2rem;font-size: 20px;">
+          Connect Us on :
+            <i class="twitter icon"></i>
+            <i class="facebook icon"></i>
+            <i class="instagram icon"></i>
+            <i class="linkedin icon"></i>
+            <i class="pinterest icon"></i>
+        </div>
+    </div>
+
+</div>
+
+    <style>
+#services {
+  content: '';
+    /* position: absolute; */
+    /* top: 0; */
+    /* left: 0; */
+    /* right:0; */
+    min-height: 270px;
+    /* width: 100%; */
+    background: rgba(32, 134, 107, 0.8);
+}
+
+  #showcase .overlay {
+    content: '';
+    position: absolute;
+    top: 0;
+    /* left: 0; */
+    /* right:0; */
+    min-height: 673px;
+    width: 100%;
+    /* background: url("/home/rithin/Downloads/bookstore.jpeg"); */
+    background: rgba(51, 51, 51, 0.6); } 
+    @media (max-width: 991px) {
+  #showcase {
+    padding-top: 4rem; }
+    #showcase h1 {
+      font-size: 40px; }
+  .hide-md-down {
+    display: none; } }
+
+@media (max-width: 768px) {
+  #showcase {
+    padding-top: 3rem; }
+    #showcase h1 {
+      font-size: 40px; }
+    #showcase p {
+      display: none; }
+  #top-bar {
+    text-align: center; }
+    #top-bar .social {
+      text-align: center !important; } }
+
+@media (max-width: 576px) {
+  #showcase h1 {
+    font-size: 30px; }
+  #showcase-inner h1 {
+    font-size: 40px; } }
+
+    </style>
+
+{% endblock %}
+

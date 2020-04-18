@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %} | Register Account {% endblock %}
+
+{% block content %}
+
+<div class="ui middle aligned center aligned grid">
+    <div class="column" style="top: 5rem;
+    width:50%;
+    bottom: 0px;
+    right: 0px;">
+      <div class="content" style="bottom:1rem;">
+        <h3> Login </h3>
+      </div>
+       <form class="ui form" method="POST" action="{% url 'register' %}"  autocomplete="off">
+        {% csrf_token %}
+        {% include 'bars/alerts.html' %}
+        <div class="ui stacked segment" style="background-color: rgba(0,0,0,0.1)">
+          <div class="field">
+                <label for="first_name">First Name</label>
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+                <input type="text" name="first_name" placeholder="first_name" autofocus="" id="id_username" required="">
+            </div>
+          </div>
+          <div class="field">
+                <label for="first_name">Last Name</label>
+            <div class="ui left icon input">
+                <i class="user icon"></i>
+            <input type="text" name="last_name"  id="id_password" required="">
+            </div>
+          </div>
+          <div class="field">
+                <label for="first_name">Username</label>
+            <div class="ui left icon input">
+                <i class="user icon"></i>
+            <input type="text" name="username"  id="id_password" required="">
+            </div>
+          </div>
+          <div class="field">
+                <label for="first_name">Email</label>
+            <div class="ui left icon input">
+                <i class="user icon"></i>
+            <input type="email" name="email" id="id_password" required="">
+            </div>
+          </div>
+          <div class="field">
+                <label for="first_name">Password</label>
+            <div class="ui left icon input">
+                <i class="lock icon"></i>
+            <input type="password" name="password" id="id_password" required="">
+            </div>
+          </div>
+          <div class="field">
+                <label for="first_name">Confirm Password</label>
+            <div class="ui left icon input">
+                <i class="lock icon"></i>
+            <input type="password" name="password2" id="id_password" required="">
+            </div>
+          </div>
+        <input type="submit" class="ui fluid large teal submit button">
+        </div>  
+
+
+{% endblock %}

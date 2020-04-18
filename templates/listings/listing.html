@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load humanize %}
+{% block title %} | {{ listing.title }} {% endblock %}
+
+{% block content %}
+
+<!-- <div class="ui huge breadcrumb" style="margin-top:1.5rem;">
+    <a class="section" href="{% url 'index' %}">Home</a>
+    <i class="right chevron icon divider"></i>
+    <a class="section" href="{% url 'listings' %}">Listings</div>
+    <i class="right chevron icon divider"></i>
+    <div class=" active section">{{listing.title}}</div>
+  </div> -->
+  <div class="row" style="background: rgba(51, 51, 51, 0.8);height:7rem;">
+    <h2 style="color:white;text-align: center;margin-top: 3rem;padding:2rem;">{{listing.title}}</h2>
+
+
+</div>
+  <div class="ui huge breadcrumb" style="margin-top:1.5rem;">
+    <a class="section" href="{% url 'index' %}">Home</a>
+    
+    <i class="right chevron icon divider"></i>
+    <a class="section" href="{% url 'listings' %}">Listings</a>
+    <i class="right chevron icon divider"></i>
+    <div class="section">{{listing.title}}</div>
+  </div>
+
+  {% include 'bars/alerts.html' %}
+
+  <div class="ui two column grid" style="margin-top:1rem;">
+      <div class="column">
+        <h2 style="margin-left: 10rem;">Book Details</h2> 
+        <div class="ui card" style="margin-left: 10rem;">
+                <div class="image">
+                  <img src="{{listing.photo_main.url}}" style="height:25rem;">
+                </div>
+                <div class="content">
+                  <a class="header">{{listing.title}}</a>
+                  <div class="meta">
+                    <span class="date"> Published : {{listing.list_date | timesince }}</span>
+                  </div>
+                  <div class="description">
+                   Genre : {{listing.genre}}
+                   <span class="right floated">Price : {{listing.price}} $</span>
+                  </div>
+                </div>
+                <div class="ui bottom attached button"> Borrow/Buy</div>
+                
+              </div>
+      </div>
+      <div class="column">
+          <h2>Author</h2>
+          <div class="ui card">
+                <div class="image">
+                  <img src="{{listing.author.photo.url}}" style="height:22rem">
+                </div>
+                <div class="content">
+                  <a class="header">{{listing.author.name}}</a>
+                  <div class="meta">
+                    <span class="date"> Joined : {{listing.author.hire_date | timesince }}</span>
+                  </div>
+                  <div class="description">
+                   Genre : {{listing.author.description}}
+                  </div>
+                </div>
+                
+              </div>
+
+      </div>
+  </div>
+
+  <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+          Submit Borrower Details:
+        </div>
+        <div class="content">
+            <form class="ui form" action="{% url 'borrow' %}" method="POST">
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                {% else %}
+                    <input type="hidden" name="user_id" value="0">
+                {% endif %}
+                <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                <div class="field">
+                    <label>Book Name</label>
+                    <input type="text" name="listing"  value="{{ listing.title }}">
+                </div>
+                <div class="field">
+                    <label>Name</label>
+                    <input type="text" name="name" {% if user.is_authenticated %} value="{{ user.first_name }} {{ user.last_name }}" {% endif %} required>
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" name="email" {% if user.is_authenticated %} value="{{ user.email }}" {% endif %} required>
+                </div>
+                <div class="field">
+                    <label>Phone</label>
+                    <input type="text" name="phone">
+                </div>
+                <input type="submit" class="ui positive right labeled icon button">
+                        
+                      
+            </form>
+        </div>
+    
+      </div>
+  <script>
+  $('.button').click(function()
+  {
+    $('.ui.modal').modal('show');
+  });
+  </script>
+{% endblock %}

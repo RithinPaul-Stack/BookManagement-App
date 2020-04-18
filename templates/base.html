@@ -1,0 +1,22 @@
+<html>
+    {% load staticfiles %}
+    <head>
+        <title>LibMgmt</title>
+        <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery-ui.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/semantic.min.js'%}"></script>
+    <link rel="stylesheet" type="text/css"  src="{% static 'css/semantic.min.css'%}"/>
+    <link rel="stylesheet" type="text/css"  src="{% static 'css/style.css'%}"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet"/>
+    <!-- <link rel="stylesheet" href="{% static 'stylesheets/jquery-ui.min.css'%}"> -->
+    
+    <!-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+    
+    <title>LibMgmt {% block title %}{% endblock %}</title>
+</head>
+<body>
+    {% include 'bars/navbar.html' %}
+    {% block content %} {% endblock %}
+    {% include 'bars/footer.html' %}
+</body>
+</html>

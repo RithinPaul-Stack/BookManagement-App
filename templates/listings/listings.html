@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+
+{% block title %} | Browse Property Listings {% endblock %}
+
+{% block content %}
+
+<div class="row" style="background: rgba(51, 51, 51, 0.8);height:6rem;">
+    <h2 style="color:white;text-align: center;margin-top: 3rem;padding:2rem;">Browse through our Catalogue..</h2>
+
+
+</div>
+<div class="ui huge breadcrumb" style="margin-top:1.5rem;">
+        <a class="section" href="{% url 'index' %}">Home</a>
+        
+        <i class="right chevron icon divider"></i>
+        <div class="active section">Listings</div>
+      </div>
+      
+      <div class="ui three column grid" style="margin-top: 2rem;">
+            {% if listings %}
+            {% for listing in listings %}
+            <div class="column">
+              <div class="ui fluid card">
+                <div class="image">
+                  <img src="{{listing.photo_main.url}}" style="height:22rem">
+                </div>
+                <div class="content">
+                        <div class="ui two column grid">
+                                <div class="column">
+                                    <span class="header" style="font-size: 18px;">{{listing.title}}</span>
+                                </div>
+                                <div class="column">
+                                    <span class="right floated">
+                                        By : {{listing.author}}
+                                      </span>
+                                </div>
+                              </div>
+                </div>
+            
+                <hr>
+                <a href="{% url 'listings' listing.id %}" class="ui bottom attached button">More Info</a>
+              </div>
+            </div>
+            {% endfor %}
+        {% else %}
+          <div style="text-align: center;">
+            <p>No Listings Available</p>
+          </div>
+        {% endif %}
+          </div>
+
+         
+            <div class="ui pagination menu" style="margin-top: 1.5rem;">
+                    {% if listings.has_previous %}    
+                    <a
+                    href="?page={{listings.previous_page_number}}">&laquo;
+                    </a>
+                    {% else %}
+                    <a class="disabled item">&laquo;</a>
+                    {% endif %}
+                    {% for i in listings.paginator.page_range %}
+                    {% if listings.number == i %}
+                    <a class="active item">
+                      {{i}}
+                    </a>
+                    {% else %}
+                    <a class="item" href="?page={{i}}">{{i}}</a>
+                    {% endif %}
+                    {% endfor %}
+                    {% if listings.has_next %}
+                    <a class="item" href="?page={{listings.next_page_number}}">
+                            &raquo;
+                    </a>
+                    {% else %}
+                    <a class="disabled item">
+                            &raquo;
+                    </a>
+                    {% endif %}
+                    
+                  </div>
+{% endblock %}
